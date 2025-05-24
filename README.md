@@ -1,16 +1,84 @@
-## Hi there 👋
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JimWear Portfolio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    section {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    .mockup {
+      background: white;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .mockup img {
+      max-width: 100%;
+      border-radius: 4px;
+    }
+    .description {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>JimWear</h1>
+    <p>Contemporary Streetwear Born in Poland</p>
+  </header>
+  <section>
+    <h2>About the Brand</h2>
+    <p>JimWear is a modern streetwear brand founded in Poland, inspired by everyday expression, bold typography, and cultural energy. Our designs blend minimalism with modern trends, delivering wearable art with attitude.</p>
 
-<!--
-**JimWear/JimWear** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+    <h2>Design Showcase</h2>
 
-Here are some ideas to get you started:
+    <div class="mockup">
+      <img src="https://via.placeholder.com/600x400?text=T-shirt+Mockup+1" alt="Mockup 1" />
+      <p class="description">Bold Statement Tee – clean lines, loud message. Perfect for everyday wear.</p>
+    </div>
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    <div class="mockup">
+      <img src="https://via.placeholder.com/600x400?text=T-shirt+Mockup+2" alt="Mockup 2" />
+      <p class="description">Minimal Logo Tee – timeless, simple, versatile. The essence of JimWear identity.</p>
+    </div>
+
+    <div class="mockup">
+      <img src="https://via.placeholder.com/600x400?text=T-shirt+Mockup+3" alt="Mockup 3" />
+      <p class="description">Typographic Drop – modern fonts meet impactful layout. Trend-aware design.</p>
+    </div>
+
+  </section>
+  <footer>
+    &copy; 2025 JimWear. All rights reserved.
+  </footer>
+</body>
+</html>
