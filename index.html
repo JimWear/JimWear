@@ -1,85 +1,170 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JimWear Portfolio</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f3f4f6;
-      color: #111827;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #111827;
-      color: white;
-      padding: 2rem;
-      text-align: center;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    section {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    .mockup {
-      background: white;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-    .mockup img {
-      max-width: 100%;
-      border-radius: 4px;
-    }
-    .description {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #6b7280;
-    }
-  </style>
+  <title>JimWear - Sklep z koszulkami</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1>JimWear</h1>
-    <p>Contemporary Streetwear Born in Poland</p>
+<body class="bg-gray-100 text-gray-900">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-10">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold text-blue-600">JimWear</h1>
+      <nav class="space-x-4">
+        <a href="#produkty" class="hover:underline">Produkty</a>
+        <a href="#login" class="hover:underline">Logowanie</a>
+        <a href="#koszyk" class="hover:underline">Koszyk</a>
+        <a href="#zamowienia" class="hover:underline">Zamówienia</a>
+      </nav>
+    </div>
   </header>
-  <section>
-    <h2>About the Brand</h2>
-    <p>JimWear is a modern streetwear brand founded in Poland, inspired by everyday expression, bold typography, and cultural energy. Our designs blend minimalism with modern trends, delivering wearable art with attitude.</p>
 
-    <h2>Design Showcase</h2>
-
-    <div class="mockup">
-      <img src="https://via.placeholder.com/600x400?text=T-shirt+Mockup+1" alt="Mockup 1" />
-      <p class="description">Bold Statement Tee – clean lines, loud message. Perfect for everyday wear.</p>
-    </div>
-
-    <div class="mockup">
-      <img src="https://via.placeholder.com/600x400?text=T-shirt+Mockup+2" alt="Mockup 2" />
-      <p class="description">Minimal Logo Tee – timeless, simple, versatile. The essence of JimWear identity.</p>
-    </div>
-
-    <div class="mockup">
-      <img src="https://via.placeholder.com/600x400?text=T-shirt+Mockup+3" alt="Mockup 3" />
-      <p class="description">Typographic Drop – modern fonts meet impactful layout. Trend-aware design.</p>
-    </div>
-
+  <!-- Hero Banner -->
+  <section class="bg-blue-600 text-white py-16 text-center">
+    <h2 class="text-4xl font-bold mb-4">Nowa kolekcja koszulek 2025</h2>
+    <p class="text-lg">Styl, wygoda i jakość – tylko w JimWear</p>
   </section>
-  <footer>
-    &copy; 2025 JimWear. All rights reserved.
+
+  <!-- Produkty -->
+  <section id="produkty" class="container mx-auto py-12">
+    <h3 class="text-2xl font-semibold mb-6">Nasze koszulki</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="produkty-lista"></div>
+  </section>
+
+  <!-- Logowanie -->
+  <section id="login" class="bg-white py-12">
+    <div class="container mx-auto max-w-md">
+      <h3 class="text-2xl font-semibold mb-4">Zaloguj się / Zarejestruj</h3>
+      <form id="login-form" class="space-y-4">
+        <input type="email" id="email" placeholder="Email" class="w-full border border-gray-300 rounded px-4 py-2" required>
+        <input type="password" id="password" placeholder="Hasło" class="w-full border border-gray-300 rounded px-4 py-2" required>
+        <button type="submit" class="bg-blue-600 text-white w-full py-2 rounded hover:bg-blue-700">Zaloguj</button>
+        <p id="login-status" class="text-sm text-green-600 mt-2"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Koszyk -->
+  <section id="koszyk" class="container mx-auto py-12">
+    <h3 class="text-2xl font-semibold mb-6">Twój koszyk</h3>
+    <div id="koszyk-lista"></div>
+    <button onclick="zlozZamowienie()" class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Złóż zamówienie</button>
+    <p id="koszyk-info" class="mt-4 text-sm"></p>
+  </section>
+
+  <!-- Zamówienia -->
+  <section id="zamowienia" class="container mx-auto py-12">
+    <h3 class="text-2xl font-semibold mb-6">Twoje zamówienia</h3>
+    <ul id="lista-zamowien" class="space-y-4"></ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+    <p>&copy; 2025 JimWear. Wszelkie prawa zastrzeżone.</p>
   </footer>
+
+  <!-- Skrypt -->
+  <script>
+    const produkty = [
+      { id: 1, nazwa: "Koszulka Czarna", cena: 89.99, img: "https://source.unsplash.com/400x400/?tshirt,black" },
+      { id: 2, nazwa: "Koszulka Biała", cena: 89.99, img: "https://source.unsplash.com/400x400/?tshirt,white" },
+      { id: 3, nazwa: "Koszulka Streetwear", cena: 99.99, img: "https://source.unsplash.com/400x400/?tshirt,streetwear" },
+    ];
+
+    let zalogowanyUzytkownik = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      wyswietlProdukty();
+      zaladujKoszyk();
+      zaladujZamowienia();
+
+      document.getElementById('login-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        localStorage.setItem('user:' + email, JSON.stringify({ email, password }));
+        zalogowanyUzytkownik = email;
+        document.getElementById('login-status').textContent = 'Zalogowano jako ' + email;
+      });
+    });
+
+    function wyswietlProdukty() {
+      const kontener = document.getElementById('produkty-lista');
+      kontener.innerHTML = '';
+      produkty.forEach(prod => {
+        kontener.innerHTML += `
+          <div class="bg-white rounded-lg shadow p-4">
+            <img src="${prod.img}" alt="${prod.nazwa}" class="rounded mb-4">
+            <h4 class="text-xl font-semibold">${prod.nazwa}</h4>
+            <p class="text-blue-600 font-bold mt-2">${prod.cena.toFixed(2)} PLN</p>
+            <button onclick="dodajDoKoszyka(${prod.id})" class="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj do koszyka</button>
+          </div>`;
+      });
+    }
+
+    function dodajDoKoszyka(id) {
+      if (!zalogowanyUzytkownik) {
+        alert('Musisz się zalogować.');
+        return;
+      }
+      const koszyk = JSON.parse(localStorage.getItem('cart:' + zalogowanyUzytkownik) || '[]');
+      koszyk.push(id);
+      localStorage.setItem('cart:' + zalogowanyUzytkownik, JSON.stringify(koszyk));
+      zaladujKoszyk();
+    }
+
+    function zaladujKoszyk() {
+      const el = document.getElementById('koszyk-lista');
+      el.innerHTML = '';
+      if (!zalogowanyUzytkownik) return;
+      const koszyk = JSON.parse(localStorage.getItem('cart:' + zalogowanyUzytkownik) || '[]');
+      if (koszyk.length === 0) {
+        el.textContent = 'Brak produktów w koszyku.';
+        return;
+      }
+      koszyk.forEach(id => {
+        const prod = produkty.find(p => p.id === id);
+        el.innerHTML += `<p>${prod.nazwa} - ${prod.cena.toFixed(2)} PLN</p>`;
+      });
+    }
+
+    function zlozZamowienie() {
+      if (!zalogowanyUzytkownik) {
+        alert('Musisz się zalogować.');
+        return;
+      }
+      const koszyk = JSON.parse(localStorage.getItem('cart:' + zalogowanyUzytkownik) || '[]');
+      if (koszyk.length === 0) {
+        alert('Koszyk jest pusty.');
+        return;
+      }
+      const zamowienia = JSON.parse(localStorage.getItem('orders:' + zalogowanyUzytkownik) || '[]');
+      zamowienia.push({ data: new Date().toLocaleString(), produkty: [...koszyk] });
+      localStorage.setItem('orders:' + zalogowanyUzytkownik, JSON.stringify(zamowienia));
+      localStorage.removeItem('cart:' + zalogowanyUzytkownik);
+      document.getElementById('koszyk-info').textContent = 'Zamówienie złożone!';
+      zaladujKoszyk();
+      zaladujZamowienia();
+    }
+
+    function zaladujZamowienia() {
+      const lista = document.getElementById('lista-zamowien');
+      lista.innerHTML = '';
+      if (!zalogowanyUzytkownik) return;
+      const zamowienia = JSON.parse(localStorage.getItem('orders:' + zalogowanyUzytkownik) || '[]');
+      if (zamowienia.length === 0) {
+        lista.innerHTML = '<p>Brak zamówień.</p>';
+        return;
+      }
+      zamowienia.forEach(z => {
+        const produktyZam = z.produkty.map(id => {
+          const p = produkty.find(p => p.id === id);
+          return p ? p.nazwa : 'Nieznany produkt';
+        }).join(', ');
+        lista.innerHTML += `<li><strong>${z.data}</strong><br>${produktyZam}</li>`;
+      });
+    }
+  </script>
 </body>
 </html>
